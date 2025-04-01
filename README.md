@@ -1,1 +1,1 @@
-# A todo task with local storage
+# A todo task with local storage. 
