@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {  // Putting everything inside here, so that, these things get worked upon after we've once loaded the page successfully.  
+document.addEventListener("DOMContentLoaded", () => { 
+  // Putting everything inside here, so that, these things get worked upon after we've once loaded the page successfully.  
   let task_text = document.getElementById("todo-input");
 
   let add_task_btn = document.getElementById("add-task-btn");
