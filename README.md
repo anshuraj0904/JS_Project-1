@@ -1,3 +1,6 @@
-# A todo task with local storage.
-# Here, we'll bring into use, the local storage's getItem(),setItem() and removeItem() methods.
-# Also, a big part of it will be done using the array destructuring syntax which is [...] kinda thing. 
+# A todo task application with local storage's usage.
+
+
+# Create a task, mark it done or undone as per the requirements, or, simply delete it. 
+
+# Requires basics of Arrays, and DOM manipulation, and a bit of local storage.

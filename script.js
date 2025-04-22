@@ -10,29 +10,42 @@ document.addEventListener("DOMContentLoaded", () => {  // Putting everything ins
 
 
 //   Rendering the tasks to the DOM:-
-  tasks.forEach((task)=>{
-    let task_tt = renderTask(task)
-    let lii = document.createElement('li')
-    lii.appendChild(document.createTextNode(task_tt))
-    let btn = document.createElement('button')
-    btn.appendChild(document.createTextNode('Delete'))
-    lii.appendChild(btn)
-    lii.setAttribute('data-id', task.id)
 
+function renderTask(task) {
+    const lii = document.createElement('li')
+    lii.setAttribute('data-id', task.id)
+    if(task.completed){
+        lii.classList.add("completed")
+    }
+
+    lii.innerHTML = `
+    <bold>${task.text}</bold>
+    <button>Delete</button>`
+    
     lii.addEventListener('click', function(e){
         if(e.target.tagName === 'BUTTON') return
+        e.preventDefault()
         task.completed = !task.completed
         lii.classList.toggle('completed')
         saveTasksToLocalStorage()
     })
-
-
+    
     lii.querySelector('button').addEventListener('click', (e)=>{
         e.stopPropagation()  // For preventing the toggle from firing.
-        
+        tasks = tasks.filter(t => t.id != task.id) 
+        // Just an arrow based function for the array.filter method.
+        // Here, we're filtering and asking for those whose id doesn't match mine.
+        saveTasksToLocalStorage()
     })
+
     ul_parent.appendChild(lii)
-  })
+  }
+
+  
+ tasks.forEach(task => {
+     renderTask(task)
+});
+    
 
   add_task_btn.addEventListener("click", function (e) {
     const taskText = task_text.value.trim();
@@ -65,14 +78,11 @@ document.addEventListener("DOMContentLoaded", () => {  // Putting everything ins
     window.location.reload()
   });
 
-  function renderTask(task) {
-    // We want that, as sson as the application is run on the live server, the tasks array gets the values from the localStorage into itself, and, then, it displays those via the lis.
-    return task.text
-  }
+
 
   function saveTasksToLocalStorage() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    window.location.reload()
   }
 
-  // let us just try to put these on the console.
 });
